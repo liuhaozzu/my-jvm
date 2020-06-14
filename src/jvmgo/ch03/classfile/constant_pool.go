@@ -12,6 +12,7 @@ func readConstantPool(reader *ClassReader) ConstantPool  {
 			i++
 		}
 	}
+	return cp
 }
 
 func (self ConstantPool) getConstantInfo(index uint16) ConstantInfo  {
@@ -32,7 +33,7 @@ func (self ConstantPool) getClassName(index uint16) string  {
 	return self.getUtf8(classInfo.nameIndex)
 }
 func (self ConstantPool) getUtf8(index uint16) string  {
-	utf8Info :=self.getConstantInfo(index).(ConstantUtf8Info)
+	utf8Info :=self.getConstantInfo(index).(*ConstantUtf8Info)
 	return utf8Info.str
 }
 
